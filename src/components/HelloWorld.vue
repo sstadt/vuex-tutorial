@@ -1,16 +1,21 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+    <todo-list :todos="todos"></todo-list>
   </div>
 </template>
 
 <script>
+import TodoList from './TodoList'
+
 export default {
   name: 'HelloWorld',
   computed: {
-    msg() {
-      return `the current count is ${this.$store.state.count}`
+    todos() {
+      return this.$store.getters.todos
     }
+  },
+  components: {
+    'todo-list': TodoList
   }
 }
 </script>
