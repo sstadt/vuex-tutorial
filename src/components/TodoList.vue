@@ -1,17 +1,24 @@
 <template>
   <div class="hello">
     <ul>
-      <li v-for="t in todos" :class="{ completed: t.completed }">{{ t.task }}</li>
+      <li v-for="t in todos" :class="{ completed: t.completed }" @click="toggleTodo(t.id)" @dblclick="deleteTodo(t.id)">{{ t.task }}</li>
     </ul>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['todos'],
   computed: {
     todos() {
       return this.$store.getters.todos
+    }
+  },
+  methods: {
+    toggleTodo(id) {
+      this.$store.commit('toggleTodo', id)
+    },
+    deleteTodo(id) {
+      this.$store.commit('deleteTodo', id)
     }
   }
 }

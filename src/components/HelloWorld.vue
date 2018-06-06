@@ -1,6 +1,9 @@
 <template>
   <div class="hello">
-    <todo-list :todos="todos"></todo-list>
+    <form @submit.prevent="addTodo">
+      <input type="text" v-model="task" />
+    </form>
+    <todo-list></todo-list>
   </div>
 </template>
 
@@ -9,6 +12,11 @@ import TodoList from './TodoList'
 
 export default {
   name: 'HelloWorld',
+  data() {
+    return {
+      task: ''
+    }
+  },
   computed: {
     todos() {
       return this.$store.getters.todos
@@ -16,6 +24,12 @@ export default {
   },
   components: {
     'todo-list': TodoList
+  },
+  methods: {
+    addTodo() {
+      this.$store.commit('addTodo', this.task)
+      this.task = ''
+    }
   }
 }
 </script>
